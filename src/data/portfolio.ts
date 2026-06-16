@@ -632,15 +632,16 @@ export const experiences = [
   },
 ];
 
+// TODO: Update with real profile data later
 export const achievements = [
-  { label: 'DSA Problems Solved', value: 500, suffix: '+', icon: '⚡', color: 'blue', sub: 'LeetCode + GFG + HackerRank' },
-  { label: 'Contest Participations', value: 40, suffix: '+', icon: '🏆', color: 'amber', sub: 'LeetCode + CodeChef' },
-  { label: 'Hackathons', value: 5, suffix: '', icon: '🚀', color: 'violet', sub: 'Top 10 finishes' },
-  { label: 'Certifications', value: 8, suffix: '', icon: '📜', color: 'emerald', sub: 'AWS, Meta, NPTEL' },
-  { label: 'Projects Built', value: 15, suffix: '+', icon: '💡', color: 'pink', sub: 'Full-stack applications' },
-  { label: 'Current CGPA', value: 8.86, suffix: '', icon: '🎓', color: 'cyan', sub: 'Out of 10.0' },
-  { label: 'GitHub Contributions', value: 300, suffix: '+', icon: '🌿', color: 'green', sub: 'Commits this year' },
-  { label: 'Max LeetCode Rating', value: 1650, suffix: '', icon: '🔥', color: 'orange', sub: 'Knight badge' },
+  { label: 'DSA Problems Solved',    value: 0,    suffix: '',  icon: '⚡', color: 'blue',    sub: 'LeetCode + GFG + HackerRank' },
+  { label: 'Contest Participations', value: 0,    suffix: '',  icon: '🏆', color: 'amber',   sub: 'LeetCode + CodeChef' },
+  { label: 'Hackathons',             value: 5,    suffix: '',  icon: '🚀', color: 'violet',  sub: 'Top 10 finishes' },
+  { label: 'Certifications',         value: 8,    suffix: '',  icon: '📜', color: 'emerald', sub: 'AWS, Meta, NPTEL' },
+  { label: 'Projects Built',         value: 15,   suffix: '+', icon: '💡', color: 'pink',    sub: 'Full-stack applications' },
+  { label: 'Current CGPA',           value: 8.86, suffix: '',  icon: '🎓', color: 'cyan',    sub: 'Out of 10.0' },
+  { label: 'GitHub Contributions',   value: 0,    suffix: '',  icon: '🌿', color: 'green',   sub: 'Commits this year' },
+  { label: 'Max LeetCode Rating',    value: 0,    suffix: '',  icon: '🔥', color: 'orange',  sub: 'No badge yet' },
 ];
 
 export const education = [

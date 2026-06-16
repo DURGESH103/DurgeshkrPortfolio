@@ -69,22 +69,25 @@ const GitHubSVG = () => (
 );
 
 /* ─── Data ───────────────────────────────────────────────── */
+// TODO: Update with real profile data later
 const DASHBOARD_STATS = [
-  { icon: Code2,     label: 'Problems Solved',  value: 500,  suffix: '+', color: '#FFA116' },
-  { icon: Trophy,    label: 'Contest Rating',    value: 1650, suffix: '',  color: '#3B82F6' },
-  { icon: GitBranch, label: 'Repositories',      value: 30,   suffix: '+', color: '#6e40c9' },
-  { icon: Star,      label: 'GitHub Stars',      value: 50,   suffix: '+', color: '#F59E0B' },
-  { icon: Flame,     label: 'Contributions',     value: 300,  suffix: '+', color: '#10B981' },
-  { icon: Target,    label: 'Projects Built',    value: 20,   suffix: '+', color: '#EC4899' },
+  { icon: Code2,     label: 'Problems Solved',  value: 0,  suffix: '', color: '#FFA116' },
+  { icon: Trophy,    label: 'Contest Rating',    value: 0,  suffix: '', color: '#3B82F6' },
+  { icon: GitBranch, label: 'Repositories',      value: 0,  suffix: '', color: '#6e40c9' },
+  { icon: Star,      label: 'GitHub Stars',      value: 0,  suffix: '', color: '#F59E0B' },
+  { icon: Flame,     label: 'Contributions',     value: 0,  suffix: '', color: '#10B981' },
+  { icon: Target,    label: 'Projects Built',    value: 20, suffix: '+', color: '#EC4899' },
 ];
 
+// TODO: Update with real profile data later
 const ACHIEVEMENTS = [
-  { year: '2024', label: 'Knight Badge',          sub: 'LeetCode',          color: '#FFA116', icon: '🏆' },
-  { year: '2024', label: '500+ Problems Solved',  sub: 'LeetCode + GFG',    color: '#3B82F6', icon: '⚡' },
+  { year: '2024', label: 'No Badge Yet',          sub: 'LeetCode',          color: '#FFA116', icon: '🏆' },
+  { year: '2024', label: '0 Problems Solved',     sub: 'LeetCode + GFG',    color: '#3B82F6', icon: '⚡' },
   { year: '2024', label: '20+ Projects Built',    sub: 'Full Stack',        color: '#10B981', icon: '🚀' },
   { year: '2023', label: '30+ Repositories',      sub: 'GitHub',            color: '#6e40c9', icon: '📦' },
 ];
 
+// TODO: Update with real profile data later
 /* Featured LeetCode */
 const LEETCODE = {
   name: 'LeetCode',
@@ -96,14 +99,15 @@ const LEETCODE = {
   gradient: 'from-[#FFA116]/20 via-transparent to-transparent',
   Logo: LeetCodeSVG,
   stats: [
-    { label: 'Problems Solved', value: '500+' },
-    { label: 'Contest Rating',  value: '1650'  },
-    { label: 'Badge',           value: 'Knight'},
-    { label: 'Global Rank',     value: 'Top 5%'},
+    { label: 'Problems Solved', value: '0'       },
+    { label: 'Contest Rating',  value: '0'        },
+    { label: 'Badge',           value: 'No Badge' },
+    { label: 'Contests',        value: '0'        },
   ],
-  tags: ['DSA Master', 'Knight Badge', 'Algorithms', 'Data Structures'],
+  tags: ['DSA', 'Algorithms', 'Data Structures'],
 };
 
+// TODO: Update with real profile data later
 /* Secondary cards */
 const SECONDARY = [
   {
@@ -115,8 +119,8 @@ const SECONDARY = [
     iconBg: 'rgba(47,141,70,0.10)',
     Logo: GFGSvg,
     stats: [
-      { label: 'Problems',   value: '200+' },
-      { label: 'Score',      value: '250+' },
+      { label: 'Problems', value: '0' },
+      { label: 'Score',    value: '0' },
     ],
     tags: ['DSA Practice', 'Interview Prep'],
   },
@@ -129,8 +133,8 @@ const SECONDARY = [
     iconBg: 'rgba(201,123,75,0.10)',
     Logo: CodeChefSVG,
     stats: [
-      { label: 'Contests',   value: '20+' },
-      { label: 'Rating',     value: '1300+'},
+      { label: 'Contests', value: '0' },
+      { label: 'Rating',   value: '0' },
     ],
     tags: ['Competitive', 'Contests'],
   },
@@ -143,8 +147,8 @@ const SECONDARY = [
     iconBg: 'rgba(139,92,246,0.10)',
     Logo: GitHubSVG,
     stats: [
-      { label: 'Repos',      value: '30+' },
-      { label: 'Commits',    value: '300+'},
+      { label: 'Repos',   value: '0' },
+      { label: 'Commits', value: '0' },
     ],
     tags: ['Open Source', 'Full Stack'],
   },

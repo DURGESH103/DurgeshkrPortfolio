@@ -11,11 +11,12 @@ const GITHUB_URL = `https://github.com/${U}`;
 const T = 'hide_border=true&theme=transparent&title_color=3b82f6&text_color=8ba3c0&icon_color=38bdf8';
 
 /* ── Fallback stat counters ──────────────────────────────── */
+// TODO: Update with real profile data later
 const fallbackStats = [
-  { icon: Code2,               label: 'Repositories',  value: '30+',  color: '#3B82F6' },
-  { icon: Star,                label: 'GitHub Stars',  value: '50+',  color: '#F59E0B' },
-  { icon: GitCommitHorizontal, label: 'Total Commits', value: '300+', color: '#10B981' },
-  { icon: GitFork,             label: 'Contributions', value: '300+', color: '#8B5CF6' },
+  { icon: Code2,               label: 'Repositories',  value: '0', color: '#3B82F6' },
+  { icon: Star,                label: 'GitHub Stars',  value: '0', color: '#F59E0B' },
+  { icon: GitCommitHorizontal, label: 'Total Commits', value: '0', color: '#10B981' },
+  { icon: GitFork,             label: 'Contributions', value: '0', color: '#8B5CF6' },
 ];
 
 /* ── External GitHub image cards (Stats + Streak) ───────── */

@@ -4,20 +4,109 @@ import Reveal from '@/components/ui/Reveal';
 import { Github, ExternalLink, Star, GitFork, Code2, GitCommitHorizontal } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const U = 'DURGESH103';
+const U          = 'DURGESH103';
 const GITHUB_URL = `https://github.com/${U}`;
-const T = 'hide_border=true&theme=transparent&title_color=3b82f6&text_color=8ba3c0&icon_color=38bdf8';
+const T          = 'hide_border=true&theme=transparent&title_color=3b82f6&text_color=8ba3c0&icon_color=38bdf8';
 
-/* ── Fallback stat counters ──────────────────────────────── */
-// TODO: Update with real profile data later
-const fallbackStats = [
-  { icon: Code2,               label: 'Repositories',  value: '0', color: '#3B82F6' },
-  { icon: Star,                label: 'GitHub Stars',  value: '0', color: '#F59E0B' },
-  { icon: GitCommitHorizontal, label: 'Total Commits', value: '0', color: '#10B981' },
-  { icon: GitFork,             label: 'Contributions', value: '0', color: '#8B5CF6' },
+/* ── Types ───────────────────────────────────────────────── */
+interface GitHubStats {
+  repos:         number;
+  stars:         number;
+  commits:       number;
+  contributions: number;
+}
+
+/* ── Stat card config ────────────────────────────────────── */
+const STAT_META = [
+  { key: 'repos'         as keyof GitHubStats, icon: Code2,               label: 'Repositories',  color: '#3B82F6' },
+  { key: 'stars'         as keyof GitHubStats, icon: Star,                label: 'GitHub Stars',  color: '#F59E0B' },
+  { key: 'commits'       as keyof GitHubStats, icon: GitCommitHorizontal, label: 'Total Commits', color: '#10B981' },
+  { key: 'contributions' as keyof GitHubStats, icon: GitFork,             label: 'Contributions', color: '#8B5CF6' },
 ];
+
+/* ── Live stat cards ─────────────────────────────────────── */
+function StatCards() {
+  const [stats,   setStats]   = useState<GitHubStats | null>(null);
+  const [error,   setError]   = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Session-level cache — avoids re-fetching on every render
+    try {
+      const cached = sessionStorage.getItem('gh_stats');
+      if (cached) {
+        setStats(JSON.parse(cached) as GitHubStats);
+        setLoading(false);
+        return;
+      }
+    } catch { /* sessionStorage unavailable (SSR guard) */ }
+
+    fetch('/api/github')
+      .then(r => {
+        if (!r.ok) throw new Error('api-error');
+        return r.json() as Promise<GitHubStats>;
+      })
+      .then(data => {
+        setStats(data);
+        try { sessionStorage.setItem('gh_stats', JSON.stringify(data)); } catch { /* ignore */ }
+      })
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
+  }, []);
+
+  /* Loading skeleton */
+  if (loading) {
+    return (
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+        {STAT_META.map(({ label }) => (
+          <div key={label} className="card text-center py-4 space-y-2.5">
+            <div className="shimmer w-5 h-5 rounded-full mx-auto" />
+            <div className="shimmer h-7 w-12 rounded-lg mx-auto" />
+            <div className="shimmer h-2.5 w-20 rounded mx-auto" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  /* Error state */
+  if (error || !stats) {
+    return (
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+        {STAT_META.map(({ icon: Icon, label, color }) => (
+          <div key={label} className="card text-center py-4">
+            <Icon size={20} className="mx-auto mb-2" style={{ color }} />
+            <p className="text-2xl font-black mb-0.5" style={{ color }}>—</p>
+            <p className="text-xs font-medium" style={{ color: 'var(--text-subtle)' }}>{label}</p>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  /* Live data */
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+      {STAT_META.map(({ key, icon: Icon, label, color }, i) => (
+        <motion.div
+          key={label}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+          className="card text-center py-4"
+        >
+          <Icon size={20} className="mx-auto mb-2" style={{ color }} />
+          <p className="text-2xl font-black mb-0.5" style={{ color }}>
+            {stats[key].toLocaleString()}
+          </p>
+          <p className="text-xs font-medium" style={{ color: 'var(--text-subtle)' }}>{label}</p>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
 
 /* ── External GitHub image cards (Stats + Streak) ───────── */
 const statCards = [
@@ -66,8 +155,7 @@ function GithubImg({ label, src }: { label: string; src: string }) {
   );
 }
 
-/* ── Top Languages — native component ───────────────────── */
-
+/* ── Top Languages ───────────────────────────────────────── */
 const TOP_LANGS = [
   { name: 'JavaScript', pct: 74, color: '#F7DF1E', bg: '#F7DF1E18' },
   { name: 'TypeScript', pct: 11, color: '#3178C6', bg: '#3178C618' },
@@ -91,24 +179,20 @@ function LangBar({ lang, animate }: { lang: typeof TOP_LANGS[0]; animate: boolea
       style={{ minHeight: 88 }}
       onMouseEnter={e => {
         (e.currentTarget as HTMLElement).style.borderColor = `${lang.color}40`;
-        (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 24px -6px ${lang.color}22`;
+        (e.currentTarget as HTMLElement).style.boxShadow  = `0 8px 24px -6px ${lang.color}22`;
       }}
       onMouseLeave={e => {
         (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
-        (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+        (e.currentTarget as HTMLElement).style.boxShadow  = 'none';
       }}
     >
-      {/* Soft glow bg */}
       <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none"
         style={{ background: `radial-gradient(circle at 50% 0%, ${lang.color}08, transparent 70%)` }} />
 
-      {/* Language dot + name */}
       <div className="flex items-center justify-between gap-2 relative z-10">
         <div className="flex items-center gap-2 min-w-0">
-          <span
-            className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-            style={{ background: lang.color, boxShadow: `0 0 6px ${lang.color}60` }}
-          />
+          <span className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+            style={{ background: lang.color, boxShadow: `0 0 6px ${lang.color}60` }} />
           <span className="text-sm font-semibold truncate">{lang.name}</span>
         </div>
         <span className="text-xs font-bold flex-shrink-0" style={{ color: lang.color }}>
@@ -116,14 +200,12 @@ function LangBar({ lang, animate }: { lang: typeof TOP_LANGS[0]; animate: boolea
         </span>
       </div>
 
-      {/* Progress bar */}
-      <div className="relative z-10 h-1.5 rounded-full overflow-hidden"
-        style={{ background: 'var(--border)' }}>
+      <div className="relative z-10 h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--border)' }}>
         <motion.div
           className="h-full rounded-full"
           style={{
             background: `linear-gradient(90deg, ${lang.color}, ${lang.color}99)`,
-            boxShadow: `0 0 6px ${lang.color}50`,
+            boxShadow:  `0 0 6px ${lang.color}50`,
           }}
           initial={{ width: 0 }}
           animate={{ width: animate ? `${lang.pct}%` : 0 }}
@@ -139,7 +221,6 @@ function TechStackDistribution() {
 
   return (
     <div ref={ref} className="card p-6 space-y-5">
-      {/* Section header */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 mb-1">
@@ -149,17 +230,12 @@ function TechStackDistribution() {
             Top languages across public repositories
           </p>
         </div>
-        <a
-          href={GITHUB_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs font-semibold text-blue-500 hover:text-blue-400 transition-colors flex items-center gap-1"
-        >
+        <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer"
+          className="text-xs font-semibold text-blue-500 hover:text-blue-400 transition-colors flex items-center gap-1">
           <Github size={12} /> @{U}
         </a>
       </div>
 
-      {/* Stack pills */}
       <div className="flex flex-wrap gap-2">
         {STACK_PILLS.map(p => (
           <span key={p.label}
@@ -170,16 +246,14 @@ function TechStackDistribution() {
         ))}
       </div>
 
-      {/* Language bars — 2 col mobile, up to 5 col on xl */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-3">
         {TOP_LANGS.map(lang => (
           <LangBar key={lang.name} lang={lang} animate={inView} />
         ))}
       </div>
 
-      {/* Footer note */}
       <p className="text-[11px] text-center" style={{ color: 'var(--text-subtle)' }}>
-        Based on public GitHub repositories · Batchfile, Dockerfile & config files excluded
+        Based on public GitHub repositories · Batchfile, Dockerfile &amp; config files excluded
       </p>
     </div>
   );
@@ -205,21 +279,13 @@ export default function GithubDashboard() {
           </p>
         </Reveal>
 
-        {/* Always-visible fallback counters */}
+        {/* Live stat counters — fetched from /api/github, cached 1 hr */}
         <Reveal delay={0.05}>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-            {fallbackStats.map(({ icon: Icon, label, value, color }) => (
-              <div key={label} className="card text-center py-4">
-                <Icon size={20} className="mx-auto mb-2" style={{ color }} />
-                <p className="text-2xl font-black mb-0.5" style={{ color }}>{value}</p>
-                <p className="text-xs font-medium" style={{ color: 'var(--text-subtle)' }}>{label}</p>
-              </div>
-            ))}
-          </div>
+          <StatCards />
         </Reveal>
 
         <div className="space-y-5">
-          {/* Stats + Streak */}
+          {/* Stats + Streak images */}
           <div className="grid md:grid-cols-2 gap-5">
             {statCards.map((c, i) => (
               <Reveal key={c.label} delay={0.1 + i * 0.05}>
@@ -228,7 +294,7 @@ export default function GithubDashboard() {
             ))}
           </div>
 
-          {/* Tech Stack Distribution — replaces the external image */}
+          {/* Tech Stack Distribution */}
           <Reveal delay={0.2}>
             <TechStackDistribution />
           </Reveal>

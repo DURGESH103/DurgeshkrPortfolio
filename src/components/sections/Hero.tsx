@@ -144,14 +144,13 @@ export default function Hero() {
             </motion.div>
 
             {/* Bio */}
-            <motion.p variants={up}
-              className="text-base sm:text-lg leading-[1.85] mb-8 max-w-lg mx-auto lg:mx-0"
-              style={{ color: 'var(--text-muted)' }}>
-              Final-year B.Tech CSE student with{' '}
-              <strong style={{ color: 'var(--text)', fontWeight: 600 }}>8.86 CGPA</strong> building
-              scalable, production-grade software. Passionate about clean architecture,
-              great UX, and shipping products that genuinely solve problems.
-            </motion.p>
+            <motion.p
+  variants={up}
+  className="text-base sm:text-lg leading-[1.85] mb-8 max-w-lg mx-auto lg:mx-0"
+  style={{ color: 'var(--text-muted)' }}
+>
+  Final-year CSE student building scalable full-stack applications with a passion for clean architecture and exceptional user experiences.
+</motion.p>
 
             {/* CTA buttons */}
             <motion.div variants={up} className="flex flex-wrap gap-3 justify-center lg:justify-start mb-8">

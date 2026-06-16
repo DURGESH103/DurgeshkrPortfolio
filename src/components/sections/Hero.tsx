@@ -17,16 +17,16 @@ const socials = [
 
 const heroStats = [
   { val: '8.86', label: 'CGPA',       color: '#3b82f6' },
-  { val: '500+', label: 'DSA Solved', color: '#f59e0b' },
+  { val: '1+', label: 'DSA Solved', color: '#f59e0b' },
   { val: '15+',  label: 'Projects',   color: '#10b981' },
   { val: '8+',   label: 'Certs',      color: '#8b5cf6' },
 ];
 
 const floatingBadges = [
   { text: '🎓 CGPA 8.86',    pos: '-top-4 -right-2 sm:-right-10', delay: 0,   drift: -6 },
-  { text: '⚡ 500+ DSA',     pos: 'top-1/3 -right-2 sm:-right-12', delay: 0.5, drift: 6 },
+  { text: '⚡ 1 DSA',     pos: 'top-1/3 -right-2 sm:-right-12', delay: 0.5, drift: 6 },
   { text: '💡 15+ Projects', pos: '-bottom-2 -right-2 sm:-right-10', delay: 1,   drift: -5 },
-  { text: '🏆 Knight LC',    pos: 'top-1/2 -left-2 sm:-left-12', delay: 1.5, drift: 7 },
+  { text: '🏆 Pending',    pos: 'top-1/2 -left-2 sm:-left-12', delay: 1.5, drift: 7 },
 ];
 
 function ParticleCanvas() {

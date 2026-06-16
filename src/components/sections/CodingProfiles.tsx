@@ -69,29 +69,27 @@ const GitHubSVG = () => (
 );
 
 /* ─── Data ───────────────────────────────────────────────── */
-// TODO: Update with real profile data later
+// Real GitHub stats — update LeetCode/GFG/CodeChef once API is integrated
 const DASHBOARD_STATS = [
-  { icon: Code2,     label: 'Problems Solved',  value: 0,  suffix: '', color: '#FFA116' },
-  { icon: Trophy,    label: 'Contest Rating',    value: 0,  suffix: '', color: '#3B82F6' },
-  { icon: GitBranch, label: 'Repositories',      value: 0,  suffix: '', color: '#6e40c9' },
-  { icon: Star,      label: 'GitHub Stars',      value: 0,  suffix: '', color: '#F59E0B' },
-  { icon: Flame,     label: 'Contributions',     value: 0,  suffix: '', color: '#10B981' },
-  { icon: Target,    label: 'Projects Built',    value: 20, suffix: '+', color: '#EC4899' },
+  { icon: Code2,     label: 'Problems Solved', value: 0,   suffix: '',  color: '#FFA116' },
+  { icon: Trophy,    label: 'Contest Rating',  value: 0,   suffix: '',  color: '#3B82F6' },
+  { icon: GitBranch, label: 'Repositories',    value: 32,  suffix: '',  color: '#6e40c9' },
+  { icon: Star,      label: 'GitHub Stars',    value: 44,  suffix: '',  color: '#F59E0B' },
+  { icon: Flame,     label: 'Contributions',   value: 205, suffix: '',  color: '#10B981' },
+  { icon: Target,    label: 'Projects Built',  value: 20,  suffix: '+', color: '#EC4899' },
 ];
 
-// TODO: Update with real profile data later
 const ACHIEVEMENTS = [
-  { year: '2024', label: 'No Badge Yet',          sub: 'LeetCode',          color: '#FFA116', icon: '🏆' },
-  { year: '2024', label: '0 Problems Solved',     sub: 'LeetCode + GFG',    color: '#3B82F6', icon: '⚡' },
-  { year: '2024', label: '20+ Projects Built',    sub: 'Full Stack',        color: '#10B981', icon: '🚀' },
-  { year: '2023', label: '30+ Repositories',      sub: 'GitHub',            color: '#6e40c9', icon: '📦' },
+  { year: '2024', label: '20+ Projects Built',   sub: 'Full Stack',     color: '#10B981', icon: '🚀' },
+  { year: '2024', label: '32 Repositories',       sub: 'github.com/DURGESH103', color: '#6e40c9', icon: '📦' },
+  { year: '2024', label: '205+ Contributions',    sub: 'GitHub',         color: '#3B82F6', icon: '⚡' },
+  { year: '2024', label: 'Active on LeetCode',    sub: 'leetcode.com/u/Durgesh_8', color: '#FFA116', icon: '🏆' },
 ];
 
-// TODO: Update with real profile data later
 /* Featured LeetCode */
 const LEETCODE = {
   name: 'LeetCode',
-  href: siteConfig.leetcode,
+  href: siteConfig.leetcode,          // https://leetcode.com/u/Durgesh_8
   accent: '#FFA116',
   glow: 'rgba(255,161,22,0.15)',
   border: 'rgba(255,161,22,0.30)',
@@ -99,56 +97,55 @@ const LEETCODE = {
   gradient: 'from-[#FFA116]/20 via-transparent to-transparent',
   Logo: LeetCodeSVG,
   stats: [
-    { label: 'Problems Solved', value: '0'       },
-    { label: 'Contest Rating',  value: '0'        },
-    { label: 'Badge',           value: 'No Badge' },
-    { label: 'Contests',        value: '0'        },
+    { label: 'Problems Solved', value: '—' },
+    { label: 'Contest Rating',  value: '—' },
+    { label: 'Badge',           value: '—' },
+    { label: 'Contests',        value: '—' },
   ],
   tags: ['DSA', 'Algorithms', 'Data Structures'],
 };
 
-// TODO: Update with real profile data later
 /* Secondary cards */
 const SECONDARY = [
   {
     name: 'GeeksforGeeks',
-    href: 'https://auth.geeksforgeeks.org/user/durgeshkumar',
+    href: siteConfig.geeksforgeeks,   // https://www.geeksforgeeks.org/profile/durgesh108
     accent: '#2F8D46',
     glow: 'rgba(47,141,70,0.15)',
     border: 'rgba(47,141,70,0.28)',
     iconBg: 'rgba(47,141,70,0.10)',
     Logo: GFGSvg,
     stats: [
-      { label: 'Problems', value: '0' },
-      { label: 'Score',    value: '0' },
+      { label: 'Problems', value: '—' },
+      { label: 'Score',    value: '—' },
     ],
     tags: ['DSA Practice', 'Interview Prep'],
   },
   {
     name: 'CodeChef',
-    href: siteConfig.codechef,
+    href: siteConfig.codechef,        // https://www.codechef.com/users/klu2300032812
     accent: '#c97b4b',
     glow: 'rgba(201,123,75,0.15)',
     border: 'rgba(201,123,75,0.28)',
     iconBg: 'rgba(201,123,75,0.10)',
     Logo: CodeChefSVG,
     stats: [
-      { label: 'Contests', value: '0' },
-      { label: 'Rating',   value: '0' },
+      { label: 'Contests', value: '—' },
+      { label: 'Rating',   value: '—' },
     ],
     tags: ['Competitive', 'Contests'],
   },
   {
     name: 'GitHub',
-    href: siteConfig.github,
+    href: siteConfig.github,          // https://github.com/DURGESH103
     accent: '#8b5cf6',
     glow: 'rgba(139,92,246,0.15)',
     border: 'rgba(139,92,246,0.28)',
     iconBg: 'rgba(139,92,246,0.10)',
     Logo: GitHubSVG,
     stats: [
-      { label: 'Repos',   value: '0' },
-      { label: 'Commits', value: '0' },
+      { label: 'Repos',        value: '32'  },
+      { label: 'Contributions', value: '205' },
     ],
     tags: ['Open Source', 'Full Stack'],
   },
@@ -231,6 +228,10 @@ function FeaturedCard() {
             <p className="text-sm font-semibold mt-0.5" style={{ color: LEETCODE.accent }}>
               Competitive Programming Platform
             </p>
+            <div className="flex items-center gap-1 mt-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span className="text-[10px] font-bold text-emerald-400">Profile Verified</span>
+            </div>
           </div>
           <ExternalLink size={16} style={{ color: 'var(--text-subtle)' }} className="flex-shrink-0 mt-1 group-hover:text-orange-400 transition-colors" />
         </div>
@@ -307,7 +308,11 @@ function SecondaryCard({ p, index }: { p: (typeof SECONDARY)[0]; index: number }
         <ExternalLink size={14} style={{ color: 'var(--text-subtle)' }} className="group-hover:opacity-100 opacity-40 transition-opacity" />
       </div>
 
-      <h3 className="font-black text-base mb-1 relative z-10">{p.name}</h3>
+      <h3 className="font-black text-base mb-0.5 relative z-10">{p.name}</h3>
+      <div className="flex items-center gap-1 mb-3 relative z-10">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+        <span className="text-[10px] font-bold text-emerald-400">Profile Verified</span>
+      </div>
 
       {/* Stats */}
       <div className="flex gap-3 mb-4 relative z-10">

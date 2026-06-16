@@ -7,8 +7,9 @@ export const siteConfig = {
   github: 'https://github.com/DURGESH103',
   linkedin: 'https://www.linkedin.com/in/durgeshkumardk',
   email: 'durgesh@example.com',
-  leetcode: 'https://leetcode.com/durgeshkumar',
-  codechef: 'https://codechef.com/users/durgeshkumar',
+  leetcode: 'https://leetcode.com/u/Durgesh_8',
+  codechef: 'https://www.codechef.com/users/klu2300032812',
+  geeksforgeeks: 'https://www.geeksforgeeks.org/profile/durgesh108',
   resume: '/resume.pdf',
   githubUsername: 'DURGESH103',
 };

@@ -52,7 +52,7 @@ const cards = [
 const stats = [
   { value: '8.86', label: 'CGPA', sub: '/ 10.0' },
   { value: '15+', label: 'Projects', sub: 'Shipped' },
-  { value: '500+', label: 'DSA', sub: 'Problems' },
+  { value: '1+', label: 'DSA', sub: 'Problems' },
   { value: '8', label: 'Certs', sub: 'Earned' },
   { value: '2026', label: 'Graduating', sub: 'B.Tech CS' },
 ];

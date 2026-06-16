@@ -7,6 +7,7 @@ import Skills          from '@/components/sections/Skills';
 import Projects        from '@/components/sections/Projects';
 import Experience      from '@/components/sections/Experience';
 import Achievements    from '@/components/sections/Achievements';
+import CodingProfiles  from '@/components/sections/CodingProfiles';
 import Education       from '@/components/sections/Education';
 import Certifications  from '@/components/sections/Certifications';
 import WhyHireMe       from '@/components/sections/WhyHireMe';
@@ -33,6 +34,7 @@ export default function Home() {
         <Projects />
         <Experience />
         <Achievements />
+        <CodingProfiles />
         <Education />
         <Certifications />
         <WhyHireMe />
